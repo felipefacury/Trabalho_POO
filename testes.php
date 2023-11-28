@@ -1,7 +1,7 @@
 <?php
 require_once 'global.php';
 
-//----------------------------------------------------DateTime
+//-----------------------------------------------------------------------------
 $fusoHorario = new DateTimeZone('America/Sao_Paulo');
 $data = new DateTime();
 $data->setTimezone($fusoHorario);
@@ -31,21 +31,7 @@ $orcamento = new Orcamento($dentista, $data, [$procedimento3, $procedimento4], [
 //-------------------------------------------------------------------------------
 $agendamento = new Agendamento($procedimento3, $dentista, $paciente);
 
-//-------------------------------------------------------------------
-
 //---------------------------------------------------------------------------TESTES
 echo var_dump($agendamento->_consultas()) . "\n";
-
-$agendamento->_consultas()[0]->aconteceu();
-$agendamento->_consultas()[1]->aconteceu();
-
-echo var_dump($agendamento->_contador()) . "\n";
-
-if($agendamento->_procedimento_realizado()){
-    echo "FIM";
-}else {
-    echo "ERRO";
-}
-
 
 ?>

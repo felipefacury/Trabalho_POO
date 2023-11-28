@@ -1,20 +1,38 @@
 <?php
 
-// require_once '/home/runner/TestesPOO/Pessoas/classes/class.Horario_trabalho.php';
+require_once 'global.php';
 
-// // Criando uma instância da classe
-// $horario = new Horario_trabalho(new DateTime('2023-11-23'), new DateTime('08:00'), new DateTime('17:00'));
+//-----------------------------------------------------------------------------
+$fusoHorario = new DateTimeZone('America/Sao_Paulo');
+$data = new DateTime();
+$data->setTimezone($fusoHorario);
 
-// // Acessando e imprimindo os valores
-// echo 'Data: ' . $horario->getData()->format('Y-m-d') . PHP_EOL;
-// echo 'Hora de início: ' . $horario->getHoraInicio()->format('H:i') . PHP_EOL;
-// echo 'Hora de término: ' . $horario->getHoraTermino()->format('H:i') . PHP_EOL;
+//-----------------------------------------------------------------------------
+$paciente = new Paciente("Felipe", "abc@hotmail.com", "3446-4235", "12345647");
 
-// // Modificando um valor usando o método set
-// $horario->set('_data', new DateTime('2023-11-24'));
+//-------------------------------------------------------------------------------
+$procedimento1 = new Procedimento("Limpeza", "limpeza geral", 150.00, 3, 40);
+$procedimento2 = new Procedimento("Extração", "extração de um dente", 200.00, 2, 100);
+$procedimento3 = $procedimento2;
+$procedimento4 = $procedimento1;
 
-// // Imprimindo o valor modificado
-// echo 'Nova data: ' . $horario->getData()->format('Y-m-d') . PHP_EOL;
+//-------------------------------------------------------------------------------
+$especialidade = new Especialidade("Geral", [$procedimento1, $procedimento2]);
 
+//-------------------------------------------------------------------------------
+$dentista = new Dentista_funcionario("Marcos", "mc@hotmail.com", "928970298", "Brasil", "MG", "Araguari", "12123-123", "são lucas", "Dois", "123", "23456785414", "2945920224", $especialidade, 3000.00);
+
+//-------------------------------------------------------------------------------
+$pagamento = new Pagamento("PIX");
+$pagamento2 = new Pagamento("Dinheiro");
+
+//-------------------------------------------------------------------------------
+$orcamento = new Orcamento($dentista, $data, [$procedimento3, $procedimento4], [$pagamento, $pagamento2]);
+
+//-------------------------------------------------------------------------------
+$agendamento = new Agendamento($procedimento3, $dentista, $paciente);
+
+//---------------------------------------------------------------------------TESTES
+echo var_dump($agendamento->_consultas()) . "\n";
 
 ?> 

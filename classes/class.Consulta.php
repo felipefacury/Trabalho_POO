@@ -17,6 +17,7 @@ class Consulta {
 
     public function aconteceu() {
         $this->_agendamento->set_contador($this->_agendamento->_contador() + 1);
+        $this->_agendamento->verifica_final();
     }
     
 }

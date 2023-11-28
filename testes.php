@@ -10,8 +10,8 @@ $data->setTimezone($fusoHorario);
 $paciente = new Paciente("Felipe", "abc@hotmail.com", "3446-4235", "12345647");
 
 //-------------------------------------------------------------------------------
-$procedimento1 = new Procedimento("Limpeza", "limpeza geral", 150.00, 3);
-$procedimento2 = new Procedimento("Extração", "extração de um dente", 200.00, 3);
+$procedimento1 = new Procedimento("Limpeza", "limpeza geral", 150.00, 3, 40);
+$procedimento2 = new Procedimento("Extração", "extração de um dente", 200.00, 2, 100);
 $procedimento3 = $procedimento2;
 $procedimento4 = $procedimento1;
 
@@ -36,9 +36,16 @@ $agendamento = new Agendamento($procedimento3, $dentista, $paciente);
 //---------------------------------------------------------------------------TESTES
 echo var_dump($agendamento->_consultas()) . "\n";
 
-//$agendamento->_consultas()[0]->
+$agendamento->_consultas()[0]->aconteceu();
+$agendamento->_consultas()[1]->aconteceu();
 
-//echo var_dump($agendamento->_consultas()) . "\n";
+echo var_dump($agendamento->_contador()) . "\n";
+
+if($agendamento->_procedimento_realizado()){
+    echo "FIM";
+}else {
+    echo "ERRO";
+}
 
 
 ?>

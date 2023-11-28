@@ -17,10 +17,8 @@ class Agendamento {
     $this->marcar_consulta();
   }
 
-  public function verifica_final(){
-    if($this->_contador == $this->_procedimento->_numero_consultas()){
-      $this->_procedimento_realizado = true;
-    }
+  public function _procedimento_realizado() {
+    return $this->_procedimento_realizado;
   }
 
   public function set_contador($valor) {
@@ -58,9 +56,15 @@ class Agendamento {
 
   public function marcar_consulta() {
     for($i = 0; $i < $this->_procedimento->_numero_consultas(); $i++){
-      $this->_consultas = array_merge($this->_consultas, [new Consulta(4, new DateTime(), $this)]);
+      $this->_consultas = array_merge($this->_consultas, [new Consulta($this->_procedimento->_duracao(), new DateTime(), $this)]);
     }
  }
+
+ public function verifica_final(){
+  if($this->_contador == $this->_procedimento->_numero_consultas()){
+    $this->_procedimento_realizado = true;
+  }
+}
 
 }
 ?>
